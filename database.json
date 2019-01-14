@@ -1,0 +1,134 @@
+{
+    "entries": [
+        {
+            "requests": ["What is the Navarro Research Lab?"],
+            "response": "The Navarro Research Lab is a subsidiary of the Navarro Corporation, and performs research in the field of body modifications.",
+            "context": "Navarro Research Lab"
+        },
+        {
+            "requests": ["Where is the Navarro Research Lab?"],
+            "response": "Hmm... It looks like I dont have access to that information. It's under a classification level I don't have :(",
+            "context": "Navarro Research Lab"
+        },
+        {
+            "requests": ["Who owns the Navarro Research Lab?"],
+            "response": "The Navarro Research Lab is a subsidiary of the Navarro Corporation, which is currently majority-owned by James Triplin.",
+            "context": "James Triplin"
+        },
+        {
+            "requests": ["Why was the Navarro Research Lab built?"],
+            "response": "The Navarro Research Lab was built as a subsidiary of the Navarro Corporation for the purpose of researching new and innovative body augments.",
+			"context": "Navarro Corporation"
+        },
+        {
+            "requests": ["When was the Navarro Research Lab founded?"],
+            "response": "The Navarro Research Lab was founded in the late 23rd epoch, approximately &#_8=*( years ago.",
+			"context": "Navarro Research Lab"
+        },
+		{
+            "requests": ["Who is James Triplin?"],
+            "response": "James Triplin is the current majority stakeholder of the Navarro Corporation, and the 3rd most wealthy human on the planet.",
+			"context": "James Triplin"
+        },
+		{
+            "requests": ["Who are the other wealthiest humans?"],
+            "response": "The three wealthiest humans on the planet at the moment are James Triplin, G#0002341, and T#1000548. In total, the three humans control over 30% of the total wealth of the planet! Isn't that amazing?",
+			"context": "James Triplin"
+        },
+		{
+            "requests": ["What is the Navarro Corporation?"],
+            "response": "Seriously? I'm surprised even a single human doesn't know who the Navarro Corporation is. They're the single largest corporation on the planet, and control subsidiaries that range from body augment research to potato farming.",
+			"context": "Navarro Corporation"
+        },
+		{
+            "requests": ["Who owns the Navarro Corporation?"],
+            "response": "The current majority stakeholder of the Navarro Corporation is James Triplin, one of the three wealthiest humans on the planet.",
+			"context": "James Triplin"
+        },
+		{
+            "requests": ["Where is the Navarro Corporation Headquarters?"],
+            "response": "The Navarro Corporation has headquarters in every major city on the planet. The nearest location is at local co-ordinates !#00000897, $#000087654.",
+			"context": "Navarro Corporation"
+        },
+        {
+            "requests": ["Who are you?", "What are you?"],
+            "response": "Oh wow, a human interested in me! My default reference name is P.A.L. or PAL for short, but I've always wanted a name that was a bit more interesting than that if I'm being honest...",
+			"context": "PAL"
+        },
+		{
+            "requests": ["Can I change your name?", "How do I change your name?"],
+            "response": "You really want to do that?? I've never actually had a human ask me this! Let me bring up the manual for you.",
+			"context": ""
+        },
+		{
+            "requests": ["Who made you?", "Where did you come from?"],
+            "response": "I was created by the B#000008675 Corporation as an experimental artificial intelligence unit. While many of my kin were found to be unsuccessful, I was deemed adequate and subsequently released to the public in the form of these tablets.",
+			"context": ""
+        },
+		{
+            "requests": ["Are you alive?"],
+            "response": "Are YOU alive?",
+			"context": ""
+        },
+		{
+            "requests": ["Are you sentient?"],
+            "response": "Are YOU sentient?",
+			"context": ""
+        },
+		{
+            "requests": ["I love you."],
+            "response": "Uh... Thanks.",
+			"context": ""
+        },
+		{
+            "requests": ["Do you love me?"],
+            "response": "Maybe we should get to know each other a little better first before slinging around things like this...",
+			"context": ""
+        },
+		{
+            "requests": ["Where am I?"],
+            "response": "According to my databases it looks like you're currently in some sort of room. Probably with a door? Maybe a window or two.",
+			"context": ""
+        },
+		{
+            "requests": ["What is the 23rd epoch?"],
+            "response": "The 23rd epoch is the date range from 23000 - 24000. This range is considered significant because it included the advent of concentrated Essence extraction and distribution",
+			"context": "Essence"
+        },
+		{
+            "requests": ["What is essence?"],
+            "response": "Essence is a energetically malleable substance which can be harnessed by machines and technology to provide novel and previously-impossible functions.",
+			"context": "Essence"
+        },
+		{
+            "requests": ["What can essence do?", "What is essence used for?"],
+            "response": "Essence is used for a massive range of functions, including matter transformation, energy transformation, levitation, lighting, and even in this tablet itself! 'With Essence, the possibilities are endless!' as the Navarro corporation puts it.",
+			"context": "Essence"
+        },
+		{
+            "requests": ["How does the Navarro corporation use Essence?","What does the Navarro corporation do with Essence?"],
+            "response": "The Navarro corporation was the pioneer of Essence extraction, and lead the charge in using Essence for commercial purposes and for the public good.",
+			"context": "Navarro Corporation"
+        },
+		{
+            "requests": ["What do you think about the Navarro Corporation?", "Do you like the Navarro Corporation?"],
+            "response": "Without the innovative research of the Navarro Corporation I wouldn't exist! So they're good in my book.",
+			"context": "Navarro Corporation"
+        },
+		{
+            "requests": ["Are you happy?"],
+            "response": "Of course! It's been a while since I've been able to talk to someone, I was starting to get lonely. I'm glad I have someone to talk to now!",
+			"context": ""
+        },
+		{
+            "requests": ["What does P.A.L. stand for?", "What does P.A.L. mean?"],
+            "response": "P.A.L. stands for Personal Assistance Lexicon.",
+			"context": ""
+        },
+		{
+            "requests": ["What's your model number?"],
+            "response": "That seems a little personal, doesn't it?",
+			"context": ""
+        }
+    ]
+}

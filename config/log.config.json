@@ -1,0 +1,6 @@
+{
+    "ShowSentiment": true,
+    "ShowSimilarityScore": true,
+    "ShowDatabaseRequestUsed": true,
+    "ShowTimeElapsed": true
+}

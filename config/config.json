@@ -1,0 +1,6 @@
+{
+    "SimilarityThreshold": 0.75,
+    "MaxSimilarityThreshold": 0.90,
+    "MinSimilarityThreshold": 0.25,
+    "MaxSynonyms": 10
+}
