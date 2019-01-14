@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
@@ -13,12 +14,13 @@ namespace AI {
         public string response;
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
-        public string context {get; set;}
+        public string context;
 
-        public DatabaseEntry(List<string> requests, string response, string context) {
-           this.requests = requests;
-           this.response = response;
-           this.context = context;
-        }
+        [DefaultValue(null)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public DatabaseEntry[] responseTree;
+
+        [JsonIgnore]
+        public DatabaseEntry[] parents;
     }
 }

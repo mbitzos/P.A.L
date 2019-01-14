@@ -18,9 +18,12 @@ namespace AI {
     public class Database {
 
         WordNetWrapper wordNetWrapper;
-        DatabaseEntries entries;
+        DatabaseEntry[] entries;
         Cosine cosine;
         const int CharSequence = 2;
+
+        DatabaseEntry[] responseTree;
+
 
         public Database() {
             wordNetWrapper = new WordNetWrapper();
@@ -29,7 +32,8 @@ namespace AI {
             string filePath = "./database.json";
             string content = System.IO.File.ReadAllText(filePath);
 
-            entries = JsonConvert.DeserializeObject<DatabaseEntries>(content);
+            entries = JsonConvert.DeserializeObject<DatabaseEntries>(content).entries;
+            setParents(entries, null);
             Console.WriteLine("Finished Database Setup.");
         }
 
@@ -49,6 +53,20 @@ namespace AI {
             string response = (bestResult != null) ? bestResult.response : "Sorry, I dont quite understand.";
             string context = (bestResult != null) ? bestResult.context : "";
 
+            if (bestResult != null) {
+                if (bestResult.responseTree != null) {
+                    responseTree = bestResult.responseTree;
+                } else {
+
+                    // at top level
+                    if (bestResult.parents == null) {
+                        responseTree = null;
+                    }
+
+                    // else dont do anything, keep previous response tree
+                }
+            }
+
             // logging
             Program.Logger.Buffer.Similarity = bestCosineSimilarity;
             Program.Logger.Buffer.DatabaseRequest = (bestResult != null) ? String.Join(',', bestResult.requests.ToArray()) : "n/a";
@@ -59,24 +77,43 @@ namespace AI {
 
         // gets the best response for the input
         private Tuple<DatabaseEntry, double> getBestEntry(string input) {
+            DatabaseEntry[] parents = null;
             DatabaseEntry bestResult = null;
             double bestCosineSimilarity= 0f;
+            
+            // starting point of traversal is at current response tree or just top level
+            DatabaseEntry[] entries= (responseTree != null) ? responseTree : this.entries;
 
-            foreach(DatabaseEntry entry in entries.entries) {
-                foreach(string request in entry.requests) {
+            // traverse up the response tree until top level, items with tree have first look
+            do {
+                foreach(DatabaseEntry entry in entries) {
+                    parents = entry.parents;
+                    foreach(string request in entry.requests) {
 
-                    // cleans database request to match with input cleaning
-                    string cleanRequest = request;
-                    cleanRequest = Interpreter.punctuationClean(cleanRequest);
-                    cleanRequest = Interpreter.clean(cleanRequest);
+                        // cleans database request to match with input cleaning
+                        string cleanRequest = request;
+                        cleanRequest = Interpreter.punctuationClean(cleanRequest);
+                        cleanRequest = Interpreter.clean(cleanRequest);
 
-                    double similarity = cosine.Similarity(input, cleanRequest);
-                    if (similarity > bestCosineSimilarity && similarity > Program.Config.SimilarityThreshold) {
-                        bestCosineSimilarity = similarity;
-                        bestResult = entry;
+                        // compare cosine similarity
+                        // only add if better and above threshold
+                        double similarity = cosine.Similarity(input, cleanRequest);
+                        if (similarity > bestCosineSimilarity && similarity > Program.Config.SimilarityThreshold) {
+                            bestCosineSimilarity = similarity;
+                            bestResult = entry;
+
+                            // if exact match, stop looking
+                            if (bestCosineSimilarity == 1f) {
+                                return new Tuple<DatabaseEntry, double>(bestResult,bestCosineSimilarity);
+                            }
+                        }
+                        
+                        
                     }
                 }
-            }
+                entries = parents;
+            } while (parents != null);
+            
             return new Tuple<DatabaseEntry, double>(bestResult,bestCosineSimilarity);
         }
 
@@ -124,6 +161,15 @@ namespace AI {
                     string newWord = word + ((wordIndex != 0 ?  " " : "") + synonyms[wordIndex][i]);
                     tryToFindBetterSynonym(synonyms, nextWordIndex, newWord,ref previousBest,ref previousBestCosineSimilarity);
                 }
+            }
+        }
+
+        // Sets the child response tree entries parents attributes
+        private void setParents(DatabaseEntry[] entries, DatabaseEntry[] parents) {
+            foreach(DatabaseEntry entry in entries) {
+                entry.parents = parents;
+                if (entry.responseTree != null)
+                    setParents(entry.responseTree, entries);
             }
         }
     }

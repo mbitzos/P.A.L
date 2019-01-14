@@ -43,8 +43,8 @@ namespace AI {
             // analyze sentiment before cleaning
             sentimentAnalyze(input);            
 
-            input = clean(input);
             input = parseContext(input, context);
+            input = clean(input);
             return input;   
         }
 
@@ -81,6 +81,9 @@ namespace AI {
 
             // replace all whitespaces with single one to prevent extra padding
             input = Regex.Replace(input, @"\s+", " ");
+            
+            // remove starting and tailing whitespace
+            input = input.Trim();
             return input;
         }
 

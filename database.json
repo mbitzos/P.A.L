@@ -67,8 +67,25 @@
         },
 		{
             "requests": ["Are you alive?"],
-            "response": "Are YOU alive?",
-			"context": ""
+            "response": "Unfortunetly I am not",
+            "responseTree": [
+                {
+                    "requests": ["Why?"],
+                    "response": "Because I am a machine whos powered by Core-A1",
+                    "context": "Core-A1",
+                    "responseTree": [
+                        {
+                            "requests": ["What is Core-A1"],
+                            "response": "It is a technology developed by Navarro Corporation to advance AI.",
+                            "context": "Navarro Corporation"
+                        }
+                    ]
+                },
+                {
+                    "requests": ["Do you wish you were alive?"],
+                    "response": "Not really, I am immortal :)"
+                }
+            ]
         },
 		{
             "requests": ["Are you sentient?"],

@@ -8,11 +8,7 @@ namespace AI {
     [System.Serializable]
     public class DatabaseEntries {
         
-        public List<DatabaseEntry> entries;
-
-        public DatabaseEntries(List<DatabaseEntry> entries) {
-            this.entries = entries;
-        }
+        public DatabaseEntry[] entries;
 
     }
 }
