@@ -38,7 +38,7 @@ namespace AI
                 while (true) {
                     Console.Write(">");
                     string input = Console.ReadLine();
-
+                    if (input == "quit"){break;}
                     stopWatch.Start();
 
                     string interpretation = interpreter.ParseInput(input, context);

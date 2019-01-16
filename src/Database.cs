@@ -34,6 +34,7 @@ namespace AI {
 
             entries = JsonConvert.DeserializeObject<DatabaseEntries>(content).entries;
             setParents(entries, null);
+            Console.WriteLine("Number of top-level database entries: " + entries.Length);
             Console.WriteLine("Finished Database Setup.");
         }
 
