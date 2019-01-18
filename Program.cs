@@ -25,6 +25,7 @@ namespace AI
             var db = new Database();
             var interpreter = new Interpreter();
             var stopWatch = new Stopwatch();
+            var speaker = new Speaker();
 
             Logger = new Logger();
 
@@ -44,7 +45,7 @@ namespace AI
                     string interpretation = interpreter.ParseInput(input, context);
 
                     var result = db.GetResponse(interpretation);
-                    Console.WriteLine(result.Item1);
+                    speaker.Respond(result.Item1);
                     context = result.Item2;
 
                     stopWatch.Stop();
