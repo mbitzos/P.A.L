@@ -72,22 +72,23 @@ ShowTimeElasped: bool default: true
 
 <h3>Custom langage markdown </h3>
 
-The database response can utilize a custom markdown parser to make the AI respond with special properties
+The database response can utilize a custom markdown parser to make the AI respond with special properties.
+NOTE: "`" is the accepted escape character for using angle brackets i.e < or > 
 
 <h4>Speed</h4>
 
-tag: <s val=1></s>
+tag: ```<s val=1></s>```
 
 description: Changes the speed of writing chars to console. 
 
 val= How much faster (if > 1) or slower (< 1) the write speed should be set to. 
 
-NOTE: If opened but never closed will change the the rest of the text writing speed (ex. abc <s val=2> test text. -"abc" will write at normal speed but the rest will write twice as fast)
+NOTE: If opened but never closed will change the the rest of the text writing speed (ex. ```abc <s val=2> test text``` -"abc" will write at normal speed but the rest will write twice as fast)
 
 
 <h4>Delay</h4>
 
-tag: <d val=1>
+tag: ```<d val=1>```
 
 description: Pauses writing for a certain amount of time
 
@@ -96,14 +97,14 @@ val= How long (in seconds) the writing should be paused for
 
 <h4>Censor</h4>
 
-tag: <cen>
+tag: ```<cen>```
 
 description: Censors a word by producing a random ASCII word instead
 
 
 <h4>Ellipsis</h4>
 
-tag: <... val=1>
+tag: ```<... val=1>```
 
 description: Creates an ellipsis with a short delay inbetween each ".'
 
