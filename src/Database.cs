@@ -51,7 +51,7 @@ namespace AI {
             if (bestCosineSimilarity < Program.Config.MaxSimilarityThreshold && bestCosineSimilarity > Program.Config.MinSimilarityThreshold )
                 bestResult = trySynonyms(input, bestResult, bestCosineSimilarity);
 
-            string response = (bestResult != null) ? bestResult.response : "Sorry, I dont quite understand.";
+            string response = (bestResult != null) ? bestResult.response: null;
             string context = (bestResult != null) ? bestResult.context : "";
 
             if (bestResult != null) {

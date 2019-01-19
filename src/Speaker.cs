@@ -27,6 +27,8 @@ namespace AI {
 
         TagManager tagManager = new TagManager();
 
+        NullResponder nullResponder = new NullResponder();
+
         public Speaker() {
             
         }
@@ -36,6 +38,11 @@ namespace AI {
         /// </summary>
         /// <param name="response">The response to write to console</param>
         public void Respond(string response) {
+
+            // response again but with new null response constructed
+            if (response == null) 
+                response = nullResponder.BuildResponse();
+
             string currentTag = "";
             bool inTag = false;
             bool inClosingTag = false;

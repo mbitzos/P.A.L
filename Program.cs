@@ -58,6 +58,8 @@ namespace AI
                     Logger.LogBuffer();
                 }
             } catch (Exception e) {
+                Console.WriteLine("Something seems to have gone wrong, please see logs.");
+                Console.WriteLine("Terminating...");
                 Logger.LogError(e);
             }
 
