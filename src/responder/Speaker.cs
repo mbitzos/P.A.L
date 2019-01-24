@@ -10,7 +10,9 @@ namespace AI {
     /// </summary>
     public class Speaker {
         const char EscapeChar = '`';
-        int charPerSecond = 20;
+        const int SentenceDelay = 300;
+        const int CommaDelay = 200;
+        int charPerSecond = 30;
     
         // how long the thread should sleep before writing next char
         int charWriteSpeed {get {return (int) (charPerSecond * currentCharPerSecondMod);}}
@@ -38,11 +40,18 @@ namespace AI {
         /// </summary>
         /// <param name="response">The response to write to console</param>
         public void Respond(string response) {
-
+            // if empty skip
+            if (response == "")
+                return;
+                
             // response again but with new null response constructed
             if (response == null) 
                 response = nullResponder.BuildResponse();
 
+
+            // replaces keys in response with actual values
+            response = Program.Properties.ReplaceTokens(response);
+            
             string currentTag = "";
             bool inTag = false;
             bool inClosingTag = false;
@@ -90,6 +99,16 @@ namespace AI {
 
                     // keep track of string inside < >
                     currentTag += letter;
+                } else if (letter.Equals('?') || letter.Equals('!') || letter.Equals('.')){
+
+                    // pause after sentence
+                    Write(letter);
+                    Thread.Sleep(SentenceDelay);
+                } else if (letter.Equals(',')) {
+
+                    // pause after comma
+                    Write(letter);
+                    Thread.Sleep(CommaDelay);
                 } else {
                     Write(letter);
                 }

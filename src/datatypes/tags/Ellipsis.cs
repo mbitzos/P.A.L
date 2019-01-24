@@ -8,6 +8,7 @@ namespace AI.Tags {
     /// </summary>
     public class Ellipsis:Tag {
 
+        const int WriteSpeed = 300;
         public Ellipsis(): base("...", false) {
 
         }
@@ -19,13 +20,13 @@ namespace AI.Tags {
             float delayTime = (!value.Equals("")) ? (int) (float.Parse(value)) : 0.5f; 
 
             // write ellipsis with delay inbetween
-            Thread.Sleep((int) (delayTime * 1000));
+            Thread.Sleep((int) (delayTime * WriteSpeed));
             speaker.Write('.');
-            Thread.Sleep((int) (delayTime * 1000));
+            Thread.Sleep((int) (delayTime * WriteSpeed));
             speaker.Write('.');
-            Thread.Sleep((int) (delayTime * 1000));
+            Thread.Sleep((int) (delayTime * WriteSpeed));
             speaker.Write('.');
-            Thread.Sleep((int) (delayTime * 1000));
+            Thread.Sleep((int) (delayTime * WriteSpeed));
         }
 
         public override void EndAction(Speaker speaker, string text) {

@@ -24,7 +24,6 @@ namespace AI {
 
         DatabaseEntry[] responseTree;
 
-
         public Database() {
             wordNetWrapper = new WordNetWrapper();
             cosine = new Cosine(CharSequence);
@@ -44,15 +43,12 @@ namespace AI {
         /// </summary>
         /// <param name="input">The request</param>
         /// <returns>The best response from the database or a default unknown answer (ex.static "Sorry, I dont quite understand")</returns>
-        public Tuple<string,string> GetResponse(string input) {
-            var bestResultTuple = getBestEntry(input);
+        public DatabaseEntry GetResponse(string input) {
+            Tuple<DatabaseEntry,double> bestResultTuple = getBestEntry(input);
             DatabaseEntry bestResult = bestResultTuple.Item1;
             double bestCosineSimilarity = bestResultTuple.Item2;
             if (bestCosineSimilarity < Program.Config.MaxSimilarityThreshold && bestCosineSimilarity > Program.Config.MinSimilarityThreshold )
                 bestResult = trySynonyms(input, bestResult, bestCosineSimilarity);
-
-            string response = (bestResult != null) ? bestResult.response: null;
-            string context = (bestResult != null) ? bestResult.context : "";
 
             if (bestResult != null) {
                 if (bestResult.responseTree != null) {
@@ -70,10 +66,29 @@ namespace AI {
 
             // logging
             Program.Logger.Buffer.Similarity = bestCosineSimilarity;
-            Program.Logger.Buffer.DatabaseRequest = (bestResult != null) ? String.Join(',', bestResult.requests.ToArray()) : "n/a";
-            Program.Logger.Buffer.Response = response;
+            Program.Logger.Buffer.DatabaseRequest = (bestResult != null) ? String.Join(',', bestResult.requests) : "n/a";
+            Program.Logger.Buffer.Response = (bestResult != null) ? bestResult.GetResponse : null;
 
-            return new Tuple<string,string>(response, context);
+            return bestResult;
+        }
+
+        /// <summary>
+        /// returns the best suited response to an input
+        /// </summary>
+        /// <param name="entries">The input entries we got from earlier</param>
+        /// <param name="input">The input to check for</param>
+        /// <returns>The best suited response for an input</returns>
+        public DatabaseInputEntry GetInputResponse(DatabaseInputEntry[] entries, string input) {
+
+            // search for specific match input
+            foreach(var inputEntry in entries) {
+                foreach(var request in inputEntry.requests)
+                    if (Program.Properties.ReplaceTokens(request) == input)
+                        return inputEntry;
+            }
+            
+            // if havent found match, return last one
+            return entries[entries.Length - 1];
         }
 
         // gets the best response for the input
@@ -84,15 +99,17 @@ namespace AI {
             
             // starting point of traversal is at current response tree or just top level
             DatabaseEntry[] entries= (responseTree != null) ? responseTree : this.entries;
-
+            
             // traverse up the response tree until top level, items with tree have first look
             do {
                 foreach(DatabaseEntry entry in entries) {
                     parents = entry.parents;
                     foreach(string request in entry.requests) {
 
+                        // replaces with keys if they exists
+                        string cleanRequest = Program.Properties.ReplaceTokens(request);;
+
                         // cleans database request to match with input cleaning
-                        string cleanRequest = request;
                         cleanRequest = Interpreter.punctuationClean(cleanRequest);
                         cleanRequest = Interpreter.clean(cleanRequest);
 

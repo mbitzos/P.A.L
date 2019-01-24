@@ -15,7 +15,7 @@ namespace AI {
     /// Handles all user input parsing
     /// </summary>
     public class Interpreter {
-        SpellChecker spellChecker;
+        SpellChecker spellChecker = new SpellChecker();
 
         // const data structs
         static string[] pronouns = {"he", "she", "they", "his", "her", "they", "it", "that"};
@@ -23,7 +23,6 @@ namespace AI {
         static string[] fillerWords = {"the", "a", "are", "is"};
         
         public Interpreter() {
-            spellChecker = new SpellChecker();
             Console.WriteLine("Finished Interpreter Setup.");
         }
 
@@ -36,6 +35,7 @@ namespace AI {
         public string ParseInput(string input, string context) {
             
             Program.Logger.Buffer.Input = input;
+
             input = punctuationClean(input);
 
             input = spellChecker.SpellCheck(input);
